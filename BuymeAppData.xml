@@ -1,0 +1,9 @@
+<?xml version = "1.0" encoding = "utf-8" ?>
+<config>
+<appPackage>il.co.mintapp.buyme</appPackage>
+<appActivity>il.co.mintapp.buyme.activities.common.SplashScreen</appActivity>
+<reportPath>E:\\intellij\\BuyMeAppiumProject\\BuyMe.html</reportPath>
+<reportConfig>E:\intellij\BuyMeAppiumProject\\reportConfig.xml</reportConfig>
+
+</config>
+
