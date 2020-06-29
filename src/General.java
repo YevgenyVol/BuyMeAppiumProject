@@ -1,5 +1,4 @@
 import io.appium.java_client.TouchAction;
-import io.appium.java_client.android.AndroidElement;
 import org.openqa.selenium.*;
 import org.openqa.selenium.io.FileHandler;
 import org.w3c.dom.Document;
@@ -9,18 +8,10 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
-import io.appium.java_client.MultiTouchAction;
-import io.appium.java_client.TouchAction;
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.AndroidElement;
 
-import java.time.Duration;
-import static io.appium.java_client.touch.TapOptions.tapOptions;
 import static io.appium.java_client.touch.WaitOptions.waitOptions;
-import static io.appium.java_client.touch.offset.ElementOption.element;
 import static io.appium.java_client.touch.offset.PointOption.point;
 import static java.time.Duration.ofMillis;
-import static java.time.Duration.ofSeconds;
 
 public class General {
 
@@ -65,7 +56,19 @@ public class General {
         textBox.sendKeys(textValue);
     }//end of userText
 
-//sadasdasdasd
+    //horizontal swap
+    public static void horizontalSwipeByPercentage (double startPercentage, double endPercentage, double anchorPercentage) {
+        Dimension size = Test.driver.manage().window().getSize();
+        int anchor = (int) (size.height * anchorPercentage);
+        int startPoint = (int) (size.width * startPercentage);
+
+        int endPoint = (int) (size.width * endPercentage);
+        new TouchAction(Test.driver)
+                .press(point(startPoint, anchor))
+                .waitAction(waitOptions(ofMillis(1000)))
+                .moveTo(point(endPoint, anchor))
+                .release().perform();
+    }
 
 
 }

@@ -12,31 +12,33 @@ public class SenderReceiverInfo {
     }//end of constructor
 
 
+    //sender and receiver info
     public void chooseSenderAndReceiver(){
-        MobileElement receier = Test.driver.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector()."
+        //receiver info
+        MobileElement receiver = Test.driver.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector()."
                 +"scrollable(true)).scrollIntoView(new UiSelector().resourceId(\"il.co.mintapp.buyme:id/toEditText\"))"));
-        General.userText("you",receier);
+        General.userText("you",receiver);
 
+        //event
         MobileElement event = Test.driver.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector()."
                 +"scrollable(true)).scrollIntoView(new UiSelector().resourceId(\"android:id/text1\"))"));
-
         event.click();
+
+        //chose birthday
         Test.driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().text(\"יום הולדת\")")).click();
 
-
+        //bkess
         MobileElement bless = Test.driver.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector()."
                 +"scrollable(true)).scrollIntoView(new UiSelector().resourceId(\"il.co.mintapp.buyme:id/blessEditText\"))"));
-
         General.userText("happy birthday",bless);
 
-
+        //sender info
         MobileElement sender = Test.driver.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector()."
                 +"scrollable(true)).scrollIntoView(new UiSelector().resourceId(\"il.co.mintapp.buyme:id/userFrom\"))"));
-
         General.userText("me",sender);
 
+        //next page
         Test.driver.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector()."
                 +"scrollable(true)).scrollIntoView(new UiSelector().resourceId(\"il.co.mintapp.buyme:id/goNextButton\"))")).click();
-    }
-
-}
+    }//end of chooseSenderAndReceiver
+}//end of SenderReceiverInfo

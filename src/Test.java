@@ -1,3 +1,4 @@
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import org.junit.*;
@@ -81,86 +82,87 @@ public class Test {
 
 
 
-//    @org.junit.Test
-//    //Login
-//    public void test01_Login() throws Exception {
-////        Thread.sleep(1000);
-//        //start test
-//        myTests = extent.startTest("Login");
-//        myTests.log(LogStatus.INFO, "Test '" + name.getMethodName() + "' started");
-//
-//        login = new Login(driver);
-//        login.loginToWeb();
+    @org.junit.Test
+    //Login
+    public void test01_Login() throws Exception {
+
+        //start test
+        myTests = extent.startTest("Login");
+        myTests.log(LogStatus.INFO, "Test '" + name.getMethodName() + "' started");
+
+        //login to app
+        login = new Login(driver);
+        login.loginToWeb();
+
+        //login check
+        try {
+            if (Test.driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"il.co.mintapp.buyme:id/tab_title\")")).isDisplayed()) {
+                myTests.log(LogStatus.PASS, name.getMethodName() + ". Login completed");
+                myTests.log(LogStatus.PASS, "", myTests.addScreenCapture(General.takeScreenShot(imagePath + "\\" + System.currentTimeMillis(), driver)));
+            }
+            else {
+                myTests.log(LogStatus.FAIL, name.getMethodName() + ". Login failed");
+                myTests.log(LogStatus.FAIL, "", myTests.addScreenCapture(General.takeScreenShot(imagePath + "\\" + System.currentTimeMillis(),driver)));
+            }
+        }
+        catch (Exception a){
+            myTests.log(LogStatus.FAIL, name.getMethodName() + ". Login failed");
+            myTests.log(LogStatus.FAIL, "", myTests.addScreenCapture(General.takeScreenShot(imagePath + "\\" + System.currentTimeMillis(), driver)));
+        }//end try-catch
+    }//end test01
 
 
-
-
-//        List<MobileElement> listOfClickableElements = driver.findElementsByAndroidUIAutomator("new UiSelector().clickable(true)");
-//        for (MobileElement element:
-//                listOfClickableElements){ System.out.println(element.getLocation());
-//            System.out.println(element.getId());
-//            System.out.println(element.getTagName());
-//        }
-
-
-
-
-//        //Assert results
-//        double actualResult = Double.parseDouble(actualResultString);
-//        double expectedResult = firstNumber + secondNumber;
-//        myTests.log(LogStatus.INFO, "numbers are " + firstNumber + " and " + secondNumber);
-//        try {
-//            Assert.assertEquals(expectedResult, actualResult, 0.001);
-//            myTests.log(LogStatus.PASS, name.getMethodName() + ". calculation completed, result is correct");
-//            myTests.log(LogStatus.PASS, "", myTests.addScreenCapture(GeneralFunc.takeScreenShot(imagePath + "\\" + System.currentTimeMillis(), driver)));
-//        }
-//        catch (AssertionError a){
-//            myTests.log(LogStatus.FAIL, name.getMethodName() + ". calculation failed, wrong result. Expected was: " + expectedResult + " actual is: " + actualResult);
-//            myTests.log(LogStatus.FAIL, "", myTests.addScreenCapture(GeneralFunc.takeScreenShot(imagePath + "\\" + System.currentTimeMillis(), driver)));
-//        }//end try-catch
-//    }//end test01
-
-//    @org.junit.Test
-//    public void test02_HomeScreen() throws InterruptedException {
-//        //start test
-//        myTests = extent.startTest("Login");
-//        myTests.log(LogStatus.INFO, "Test '" + name.getMethodName() + "' started");
-//
-//        gift = new HomeScreeen(driver);
-//        gift.chooseGift();
-//    }//end test 02
-//
-//
-//    @org.junit.Test
-//    public void test03_SenderAndReceiver() throws InterruptedException {
-//        //start test
-//        myTests = extent.startTest("Login");
-//        myTests.log(LogStatus.INFO, "Test '" + name.getMethodName() + "' started");
-//
-//        giftInfo = new SenderReceiverInfo(driver);
-//        giftInfo.chooseSenderAndReceiver();
-//    }//end test03
-//
-//
-//    @org.junit.Test
-//    public void test04_SenderViaEmail() throws InterruptedException {
-//        //start test
-//        myTests = extent.startTest("Login");
-//        myTests.log(LogStatus.INFO, "Test '" + name.getMethodName() + "' started");
-//
-//        finalizeSend = new SendTo(driver);
-//        finalizeSend.sendViaMail();
-//
-//    }//end test03
 
     @org.junit.Test
+    public void test02_HomeScreen() throws InterruptedException {
+        //start test
+        myTests = extent.startTest("Choose Gift");
+        myTests.log(LogStatus.INFO, "Test '" + name.getMethodName() + "' started");
+
+        //choose gift
+        gift = new HomeScreeen(driver);
+        gift.chooseGift();
+    }//end test 02
+
+
+    @org.junit.Test
+    public void test03_SenderAndReceiver() throws InterruptedException {
+        //start test
+        myTests = extent.startTest("Login");
+        myTests.log(LogStatus.INFO, "Test '" + name.getMethodName() + "' started");
+
+        //sender and receiver info
+        giftInfo = new SenderReceiverInfo(driver);
+        giftInfo.chooseSenderAndReceiver();
+    }//end test03
+
+
+    @org.junit.Test
+    public void test04_SenderViaEmail() throws InterruptedException {
+        //start test
+        myTests = extent.startTest("Login");
+        myTests.log(LogStatus.INFO, "Test '" + name.getMethodName() + "' started");
+
+        //send to info
+        finalizeSend = new SendTo(driver);
+        finalizeSend.sendViaMail();
+    }//end test04
+
+    @org.junit.Test
+    //max price
     public void test05_MaxPrice() throws InterruptedException {
         myTests = extent.startTest("Login");
         myTests.log(LogStatus.INFO, "Test '" + name.getMethodName() + "' started");
-        login = new Login(driver);
-        login.loginToWeb();
+
+        //back to main page
+        MobileElement back = Test.driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().description(\"נווט למעלה\")"));
+        for (int i = 0 ;  i < 4 ; i++)
+        {
+            back.click();
+        }
+
+        //max price
         gift = new HomeScreeen(driver);
         gift.mostExpensive();
-    }
-
+    }//end test05
 }

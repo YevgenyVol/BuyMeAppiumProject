@@ -1,7 +1,4 @@
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -22,6 +19,7 @@ public class Login {
 
 
 
+
     //constructor
     public Login(AndroidDriver driver){
         Test.driver = driver;
@@ -29,10 +27,12 @@ public class Login {
     }//end of constructor
 
     public void loginToWeb(){
+        //login
         loginButton.click();
+        //google
         googleButton.click();
+        //user
         chooseUser.click();
     }
-
 
 }

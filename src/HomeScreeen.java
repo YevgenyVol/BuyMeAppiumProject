@@ -1,38 +1,20 @@
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-import static io.appium.java_client.touch.WaitOptions.waitOptions;
-import static io.appium.java_client.touch.offset.PointOption.point;
-import static java.time.Duration.ofMillis;
-
 public class HomeScreeen {
 
-//    @FindBy(id = "il.co.mintapp.buyme:id/skipButton")
-//    WebElement loginButton;
 
     @FindBy (id = "il.co.mintapp.buyme:id/priceEditText")
     WebElement insertPrice;
 
     @FindBy (id = "il.co.mintapp.buyme:id/purchaseButton")
     WebElement chooseButton;
-
-    @FindBy (id = "il.co.mintapp.buyme:id/giftPrice")
-        WebElement price;
-
-    @FindBy (id = "il.co.mintapp.buyme:id/i_shadow")
-    WebElement adsad;
-
-
-
 
     //constructor
     public HomeScreeen(AndroidDriver driver){
@@ -41,37 +23,29 @@ public class HomeScreeen {
     }//end of constructor
 
     public void chooseGift() throws InterruptedException {
-
         //choose fashion gift cards
         Test.driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().description(\"גיפט קארד למותגי אופנה\")")).click();
 
         Test.driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().text(\"מגוון חנויות בקניוני עזריאלי\")")).click();
 
+        //gift value
         General.userText("200",insertPrice);
-
         chooseButton.click();
-
-
-//        Test.driver.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true))"
-//                + ".scrollIntoView(new UiSelector().description(\"קבוצת גולף - Golf\"))"));
     }
 
     public void mostExpensive() throws InterruptedException {
-        Test.driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"il.co.mintapp.buyme:id/i_background\")")).click();
-//        Test.driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().text(\"מקס ברנר עד הבית \")")).click();
-        Thread.sleep(2000);
-        MobileElement event = Test.driver.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector()."
-                +"scrollable(true)).scrollIntoView(new UiSelector().text(\"מקס ברנר עד הבית \"))"));
+        //swap right
+        General.horizontalSwipeByPercentage(0.8,0.1,0.9);
+        General.horizontalSwipeByPercentage(0.8,0.1,0.9);
 
-        event.click();
+        //choose shop
+        General.tapByCoordinates(556,1516);
 
-
-
-
-        List<MobileElement> listOfClickableElements = Test.driver.findElementsByAndroidUIAutomator("new UiSelector().textContains(\"₪\")");
+        //list of price elements
+        List<MobileElement> listOfElements = Test.driver.findElementsByAndroidUIAutomator("new UiSelector().textContains(\"₪\")");
 
         for (MobileElement element:
-                listOfClickableElements){ System.out.println(element.getLocation());
+                listOfElements){ System.out.println(element.getLocation());
             System.out.println(element.getId());
             System.out.println(element.getTagName());
             System.out.println(element.getText());
@@ -84,7 +58,8 @@ public class HomeScreeen {
             System.out.println(element.getTagName());
             System.out.println(element.getText());
         }
-    }
+        System.out.println(Test.driver.getPageSource());
+    }//end of most expensive
 
 
 
