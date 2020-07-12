@@ -76,8 +76,8 @@ public class Test {
         //TODO app exit from account
 
         extent.flush();
-//        driver.closeApp();
-//        driver.quit();
+        driver.closeApp();
+        driver.quit();
     }
 
 
@@ -120,38 +120,68 @@ public class Test {
         myTests.log(LogStatus.INFO, "Test '" + name.getMethodName() + "' started");
 
         //choose gift
-        gift = new HomeScreeen(driver);
-        gift.chooseGift();
+        try{
+            gift = new HomeScreeen(driver);
+            gift.chooseGift();
+            myTests.log(LogStatus.PASS, name.getMethodName() + ". gift chose");
+            myTests.log(LogStatus.PASS, "", myTests.addScreenCapture(General.takeScreenShot(imagePath + "\\" + System.currentTimeMillis(), driver)));
+        }
+        catch (Exception e)
+        {
+            myTests.log(LogStatus.FAIL, name.getMethodName() + ". gift choose fail");
+            myTests.log(LogStatus.FAIL, "", myTests.addScreenCapture(General.takeScreenShot(imagePath + "\\" + System.currentTimeMillis(), driver)));
+        }
+
     }//end test 02
 
 
     @org.junit.Test
     public void test03_SenderAndReceiver() throws InterruptedException {
         //start test
-        myTests = extent.startTest("Login");
+        myTests = extent.startTest("Sender and receiver data");
         myTests.log(LogStatus.INFO, "Test '" + name.getMethodName() + "' started");
 
         //sender and receiver info
-        giftInfo = new SenderReceiverInfo(driver);
-        giftInfo.chooseSenderAndReceiver();
+        try{
+            giftInfo = new SenderReceiverInfo(driver);
+            giftInfo.chooseSenderAndReceiver();
+            myTests.log(LogStatus.PASS, name.getMethodName() + ". data fiiled");
+            myTests.log(LogStatus.PASS, "", myTests.addScreenCapture(General.takeScreenShot(imagePath + "\\" + System.currentTimeMillis(), driver)));
+        }
+        catch (Exception e)
+        {
+            myTests.log(LogStatus.FAIL, name.getMethodName() + ". SenderReceiverInfo fail");
+            myTests.log(LogStatus.FAIL, "", myTests.addScreenCapture(General.takeScreenShot(imagePath + "\\" + System.currentTimeMillis(), driver)));
+        }
+
+
     }//end test03
 
 
     @org.junit.Test
     public void test04_SenderViaEmail() throws InterruptedException {
         //start test
-        myTests = extent.startTest("Login");
+        myTests = extent.startTest("email data");
         myTests.log(LogStatus.INFO, "Test '" + name.getMethodName() + "' started");
 
         //send to info
-        finalizeSend = new SendTo(driver);
-        finalizeSend.sendViaMail();
+        try{
+            finalizeSend = new SendTo(driver);
+            finalizeSend.sendViaMail();
+            myTests.log(LogStatus.PASS, name.getMethodName() + ". sent complete");
+            myTests.log(LogStatus.PASS, "", myTests.addScreenCapture(General.takeScreenShot(imagePath + "\\" + System.currentTimeMillis(), driver)));
+        }
+        catch (Exception e)
+        {
+            myTests.log(LogStatus.FAIL, name.getMethodName() + ". failed to send gift via email");
+            myTests.log(LogStatus.FAIL, "", myTests.addScreenCapture(General.takeScreenShot(imagePath + "\\" + System.currentTimeMillis(), driver)));
+        }
     }//end test04
 
     @org.junit.Test
     //max price
     public void test05_MaxPrice() throws InterruptedException {
-        myTests = extent.startTest("Login");
+        myTests = extent.startTest("max price");
         myTests.log(LogStatus.INFO, "Test '" + name.getMethodName() + "' started");
 
         //back to main page
